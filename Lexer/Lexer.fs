@@ -63,7 +63,7 @@ let main argv =
          ['0'..'9']@['a'..'z']@['A'..'Z']@[' '],'*'
          ['\"'],'=']
 
-    // Literals
+    // Brackets
     let lSqBra = [['['],'=']
     let rSqBra = [[']'],'=']
     let lRdBra = [['('],'=']
@@ -129,10 +129,51 @@ let main argv =
          ['>'],'='
          ['>'],'=']
 
+    // Active patterns
+    let lActivePattern = 
+        [['('],'='
+         ['|'],'=']
+    let rActivePattern = 
+        [['|'],'='
+         [')'],'=']
+
+    // Functions
+    let arrow = 
+        [['-'],'='
+         ['>'],'=']
+    let memberAccess = [['.'],'=']
+    let typeSeperator = [[':'],'=']
+    let refAssign = 
+        [[':'],'='
+         ['>'],'=']
+    let listSeperator = 
+        [[':'],'='
+         [':'],'=']
+
+    // Seperator
+    let seperator = [[';'],'=']
+
+    // Optional
+    let seperator = [['?'],'=']
+
+    // At
+    let seperator = [['@'],'=']
+
+    // Range
+    let range = 
+        [['.'],'='
+         ['.'],'=']
+
     // Comments
     let singleComm = 
         [['/'],'='
          ['/'],'=']
+    let lMultiComm = 
+        [['('],'='
+         ['*'],'=']
+    let rMultiComm = 
+        [['*'],'='
+         [')'],'=']
 
     let print x = printfn "%A" x
 
