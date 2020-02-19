@@ -1,0 +1,71 @@
+numbers = 
+    | int
+    | decimal
+
+int = [-]?[0-9]+
+decimal = [-]?[0-9].[0-9]+
+
+oSQBra = [
+cSQBra = ]
+
+oCUBra = (
+cCUBra = )
+
+DQUO = "
+SQUO = '
+
+SINGCOMM = /{2}
+oMULTICOMM = (*
+cMULTICOMM = *)
+ 
+
+Operators = 
+    | plusOp
+    | subOp
+    | multOp
+    | divOp
+    | remOp
+    | expOp
+    | equal
+    | notEqual
+    | greaterThan
+    | lessThan
+    | greaterThanEqual
+    | lessThanEqual
+    | boolNOT
+    | boolOR
+    | boolAND
+    | bitAND
+    | bitOR
+    | bitXOR
+    | bitNOT
+    | bitLSHIFT
+    | bitRSHIFT
+# NULLABLE NOT IMP
+
+plusOp = +
+subOp = -
+multOp = *
+divOp = /
+remOp = %
+expOp = *{2}
+
+equal = =
+notEqual = <>
+greaterThan = >
+lessThan = <
+greaterThanEqual = <=
+lessThanEqual = >=
+
+boolNOT = not
+boolOR = |{2}
+boolAND = &{2}
+
+bitAND = &{3}
+bitOR = |{3}
+bitXOR = ^{3}
+bitNOT = ~{3}
+bitLSHIFT = <{3}
+bitRSHIFT = >{3}
+
+
