@@ -48,6 +48,7 @@ let lexNGram nGram cLst =
 [<EntryPoint>]
 let main argv = 
 
+    // Literals
     let floatLit =
         [['-'],'?'
          ['0'..'9'],'+'
@@ -62,11 +63,73 @@ let main argv =
          ['0'..'9']@['a'..'z']@['A'..'Z']@[' '],'*'
          ['\"'],'=']
 
-    let LSqBra = [['['],'=']
-    let RSqBra = [[']'],'=']
-    let LRdBra = [['('],'=']
-    let RRdBra = [[')'],'=']
+    // Literals
+    let lSqBra = [['['],'=']
+    let rSqBra = [[']'],'=']
+    let lRdBra = [['('],'=']
+    let rRdBra = [[')'],'=']
 
+    // Arith ops
+    let plus = [['+'],'=']
+    let minus = [['-'],'=']
+    let mult = [['*'],'=']
+    let div = [['/'],'=']
+    let rem = [['%'],'=']
+    let exp = 
+        [['*'],'='
+         ['*'],'=']
+
+    // Arith Comparison ops
+    let equal = [['='],'=']
+    let notEqual = 
+        [['<'],'='
+         ['>'],'=']
+    let greaterThan = [['<'],'=']
+    let greaterThanOrEq = 
+        [['<'],'='
+         ['='],'=']
+    let lessThan = [['>'],'=']
+    let lessThanOrEq = 
+        [['>'],'='
+         ['='],'=']
+    let div = [['/'],'=']
+
+    // Boolean ops
+    let boolNot = [['!'],'=']
+    let boolAnd = 
+        [['&'],'='
+         ['&'],'=']
+    let boolOr = 
+        [['|'],'='
+         ['|'],'=']
+
+    // Bitwise ops
+    let bitwiseAnd = 
+        [['&'],'='
+         ['&'],'='
+         ['&'],'=']
+    let bitwiseOr = 
+        [['|'],'='
+         ['|'],'='
+         ['|'],'=']
+    let bitwiseXor = 
+        [['^'],'='
+         ['^'],'='
+         ['^'],'=']
+    let bitwiseNot = 
+        [['~'],'='
+         ['~'],'='
+         ['~'],'=']
+    let bitwiseLshift = 
+        [['<'],'='
+         ['<'],'='
+         ['<'],'=']
+    let bitwiseRshift = 
+        [['>'],'='
+         ['>'],'='
+         ['>'],'=']
+
+    // Comments
     let singleComm = 
         [['/'],'='
          ['/'],'=']
