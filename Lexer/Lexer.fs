@@ -62,10 +62,14 @@ let main argv =
          ['0'..'9']@['a'..'z']@['A'..'Z']@[' '],'*'
          ['\"'],'=']
 
-    let lSqBracket =
-        [['\"'],'='
-         ['0'..'9']@['a'..'z']@['A'..'Z']@[' '],'*'
-         ['\"'],'=']
+    let LSqBra = [['['],'=']
+    let RSqBra = [[']'],'=']
+    let LRdBra = [['('],'=']
+    let RRdBra = [[')'],'=']
+
+    let singleComm = 
+        [['/'],'='
+         ['/'],'=']
 
     let print x = printfn "%A" x
 
