@@ -62,6 +62,11 @@ let main argv =
          ['0'..'9']@['a'..'z']@['A'..'Z']@[' '],'*'
          ['\"'],'=']
 
+    let lSqBracket =
+        [['\"'],'='
+         ['0'..'9']@['a'..'z']@['A'..'Z']@[' '],'*'
+         ['\"'],'=']
+
     let print x = printfn "%A" x
 
     print (lexNGram integerLit (Seq.toList "here"))

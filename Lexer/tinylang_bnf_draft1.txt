@@ -1,0 +1,78 @@
+<func_def_list> ::= <func_def> | <func_def> <func_def_list>
+
+<func_def> ::= <named_func_def> | <lambda>
+
+<named_func_def> ::= "let" <identifier> <param_list> "=" <curly_bracketed_block_item>
+
+<lambda> ::= "fun" <param_list> "->" <curly_bracketed_block_item>
+
+<param_list> ::= <identifier> | <identifier> <param_list>
+
+<block_item> ::= <applicative_exp> | <func_def_list> <applicative_exp>
+
+--------------------------------------------------------------------------------
+
+<item> ::= <number> | <identifier> | <round_bracketed_additive_exp> | <lambda> | <list> | <built_in_func> //| <if_exp> | <pattern_match>
+
+<applicative_exp> ::= <item> | <item> <applicative_exp>
+
+<multiplicative_exp> ::= <applicative_exp> | <applicative_exp> <multiplicative_op> <multiplicative_exp>
+
+<additive_exp> ::= <multiplicative_exp> | <multiplicative_exp> <additive_op> <additive_exp>
+
+<multiplicative_op> ::= "*" | "/"
+
+<additive_op> ::= "+ | "-"
+
+-----------------------------------OTHERS----------------------------------------
+
+<if_exp> ::= "if" <applicative_exp> "then" <curly_bracketed_block_item> "else" <curly_bracketed_block_item>
+
+<list> ::= null | <item> <list>
+//type Lst = NULL | LstPair of Item * Lst
+
+Issues:
+- No type checking at all in the parser level
+-> anything can be applied to and anything can be passed as parameter
+-> this includes numbers being applied to (i.e valid syntax:  1 2 3 4 5)
+-> allows for functions to be returned
+-> type checking must be done by RT
+
+- No entry point, script is evaluated immediately: anything can be returned
+-> If script only has a function definition, the RT should simply return the definition itself or simply state that
+there is only a function definition.
+
+- Left-associative.
+
+- applicative_exp is the driver (root for evaluation)
+
+//input
+Token
+| NumberLit of string
+| Identifier of string
+| Let
+| Fun
+| EqualTo
+| Arrow
+| LRdBra
+| RRdBra
+| LSqBra
+| RSqBra
+| LCBra
+| RCBra
+| If
+| Then
+| Else
+| GreaterThan
+| GreaterOrEqTo
+| LessThan
+| LessOrEqTo
+| Add
+| Minus
+| Mult
+| Divide
+| Endf
+| Other of string
+
+- Settle Token List
+- Confirm input/output
