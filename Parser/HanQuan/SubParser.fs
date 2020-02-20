@@ -1,4 +1,4 @@
-module rec parser
+module rec SubParser
 
 type Token =
     | NumberLit of string
@@ -38,8 +38,8 @@ type BinaryOperation =
     | DivideOp
     | GreaterThanOp
     | LessThanOp
-    | GreaterOrEqOp
-    | LessOrEqOp
+    | GreaterOrEqToOp
+    | LessOrEqToOp
     | EqOp
 
 type AST = 
@@ -74,6 +74,12 @@ let makeLeftAssoc (ast:AST) : AST =
         | ast -> ast
     convert ast;
 
+let (|TM|_|) (token: Token) (inp: Result<Token list, string * Token List>) =
+    match inp with
+    | Error (error, inp') -> Some (Error (error, inp'))
+    | Ok (tok :: inp') when tok = token -> Some (Ok inp')
+    | _ -> None
+
 let (|ITEM|_|) inp =
     match inp with
     | Error (error, inp') -> Some (None, Error (error, inp'))
@@ -84,12 +90,6 @@ let (|ITEM|_|) inp =
     | IFEXP (Some ifExp, Ok inp') -> Some (Some ifExp, Ok inp')
     | LIST (Some list, Ok inp') -> Some (Some list, Ok inp')
     | Ok inp' -> Some (None, Error ("Error parsing item", inp'))
-
-let (|TM|_|) (token: Token) (inp: Result<Token list, string * Token List>) =
-    match inp with
-    | Error (error, inp') -> Some (Error (error, inp'))
-    | Ok (tok :: inp') when tok = token -> Some (Ok inp')
-    | _ -> None
 
 let (|RDBRA_ADD|_|) inp = 
     let (|LH|_|) = (|TM|_|) LRdBra;
@@ -109,10 +109,12 @@ let (|COMPEXP|_|) inp =
     | Error (error, inp') -> Some (None, Error (error, inp'))
     | ADDEXP (Some ast1, GT (COMPEXP (Some ast2, Ok inp'))) -> Some (Some (BinOp (GreaterThanOp, ast1, ast2)), Ok inp')
     | ADDEXP (Some ast1, LT (COMPEXP (Some ast2, Ok inp'))) -> Some (Some (BinOp (LessThanOp, ast1, ast2)), Ok inp')
-    | ADDEXP (Some ast1, GTE (COMPEXP (Some ast2, Ok inp'))) -> Some (Some (BinOp (GreaterOrEqOp, ast1, ast2)), Ok inp')
-    | ADDEXP (Some ast1, LTE (COMPEXP (Some ast2, Ok inp'))) -> Some (Some (BinOp (LessOrEqTo, ast1, ast2)), Ok inp')
+    | ADDEXP (Some ast1, GTE (COMPEXP (Some ast2, Ok inp'))) -> Some (Some (BinOp (GreaterOrEqToOp, ast1, ast2)), Ok inp')
+    | ADDEXP (Some ast1, LTE (COMPEXP (Some ast2, Ok inp'))) -> Some (Some (BinOp (LessOrEqToOp, ast1, ast2)), Ok inp')
     | ADDEXP (Some ast1, EQ (COMPEXP (Some ast2, Ok inp'))) -> Some (Some (BinOp (EqOp, ast1, ast2)), Ok inp')
     | Ok inp' -> Some (None, Error ("Error parsing compare exp", inp'))
+
+let COMPEXP = (|COMPEXP|_|)
 
 let (|ADDEXP|_|) inp =
     let (|ADD|_|) = (|TM|_|) Add
@@ -192,7 +194,13 @@ let parser (inp: Token list) : Result<AST, int*string> =
     | ADDEXP (_, Ok inp') -> Error (getErrorIndex inp inp', "matched nothing")
     | _ -> impossible()
 
-let testTokenList = [
+let test1 = [
+    NumberLit("1")
+    Add
+    NumberLit("2")
+]
+
+let test2 = [
     Identifier("f")
     LRdBra
     NumberLit("1")
