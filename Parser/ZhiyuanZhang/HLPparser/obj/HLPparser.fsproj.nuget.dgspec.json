@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\programming\\High-level-programing-F-compiler\\Parser\\ZhiyuanZhang\\HLPparser\\HLPparser.fsproj": {}
+    "d:\\programming\\High-level-programing-F-compiler\\Parser\\ZhiyuanZhang\\HLPparser\\HLPparser.fsproj": {}
   },
   "projects": {
-    "D:\\programming\\High-level-programing-F-compiler\\Parser\\ZhiyuanZhang\\HLPparser\\HLPparser.fsproj": {
+    "d:\\programming\\High-level-programing-F-compiler\\Parser\\ZhiyuanZhang\\HLPparser\\HLPparser.fsproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\programming\\High-level-programing-F-compiler\\Parser\\ZhiyuanZhang\\HLPparser\\HLPparser.fsproj",
+        "projectUniqueName": "d:\\programming\\High-level-programing-F-compiler\\Parser\\ZhiyuanZhang\\HLPparser\\HLPparser.fsproj",
         "projectName": "HLPparser",
-        "projectPath": "D:\\programming\\High-level-programing-F-compiler\\Parser\\ZhiyuanZhang\\HLPparser\\HLPparser.fsproj",
+        "projectPath": "d:\\programming\\High-level-programing-F-compiler\\Parser\\ZhiyuanZhang\\HLPparser\\HLPparser.fsproj",
         "packagesPath": "C:\\Users\\bubbl\\.nuget\\packages\\",
-        "outputPath": "D:\\programming\\High-level-programing-F-compiler\\Parser\\ZhiyuanZhang\\HLPparser\\obj\\",
+        "outputPath": "d:\\programming\\High-level-programing-F-compiler\\Parser\\ZhiyuanZhang\\HLPparser\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\bubbl\\AppData\\Roaming\\NuGet\\NuGet.Config"

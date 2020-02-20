@@ -1,0 +1,38 @@
+<func_def_list> ::= <func_def> | <func_def> <func_def_list>
+
+<func_def> ::= <named_func_def> | <lambda>
+
+<named_func_def> ::= "let" <identifier> <param_list> "=" "{" <block_item> "}"
+
+<lambda> ::= "fun" <param_list> "->" <block_item>
+
+<param_list> ::= <identifier> | <identifier> <param_list>
+
+<block_item> ::= <additive_exp> | <func_def_list> <additive_exp> 
+
+ type Token = 
+        | NumberLit of string
+        | Identifier of string
+        | Let 
+        | Fun 
+        | EqualTo // =
+        | Arrow // ->
+        | LRdBra // (
+        | RRdBra // )
+        | LSqBra // [
+        | RSqBra // ]
+        | LCBra //  {
+        | RCBra  // }
+        | If   
+        | Then
+        | Else
+        | GreaterThan // >
+        | GreaterOrEqTo // >=
+        | LessThan    // <
+        | LessOrEqTo  // <=
+        | Add          // + 
+        | Minus         // -
+        | Mult          // *
+        | Divide        // /
+        | Endf          // ;
+        | Other of string

@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\bubbl\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\bubbl\\.nuget\\packages"
+    ]
+  }
+}
