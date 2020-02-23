@@ -75,7 +75,7 @@ module rec secondparser =
         |IDENT (Some id1, PARAMLST (Some paras, Ok tail)) -> Some (ParaLst(id1,paras)), Ok tail 
         |IDENT (Some id1, Ok tail) -> Some (ParaLst(id1,NULL)), Ok tail 
         //let errors pass from bottom
-        |IDENT (Some id1, PARAMLST (None, Error msg)) -> None, Error msg
+        |IDENT (Some _, PARAMLST (None, Error msg)) -> None, Error msg
         |IDENT (None, Error msg) -> None, Error msg
         //default
         |_ -> None, Error ("undefined error at parameters")
@@ -163,10 +163,6 @@ module rec secondparser =
     let SubParsing inp = 
          (|FUNLST|_|) (Ok inp)
 
-
-       
-    
-   
 
 open secondparser
 [<EntryPoint>]
