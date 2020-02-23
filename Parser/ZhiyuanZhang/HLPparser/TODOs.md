@@ -1,6 +1,6 @@
 TODO:
-
-1. work on error locations
-2. format the output
-3. test 
+1. add empty cases for function body
+2. work on error locations
+3. format the output
+4. test 
 

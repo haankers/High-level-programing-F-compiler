@@ -131,7 +131,6 @@ module rec secondparser =
         |LET (IDENT (Some _,PARAMLST (None, Error msg)) )-> None, Error msg
         |LET (IDENT (None, Error msg) )-> None, Error msg
         |LET (IDENT (Some _, EQL(CURLY (None,Error msg))))-> None,Error msg
-        |LET (IDENT (None,Error msg))-> None,Error msg
         //default
         | _ -> None, Error("undefined error when parsing user-defined functions")
         |> Some
@@ -174,6 +173,7 @@ let main argv =
     
     //printfn "Id: %A" ((|IDENT|_|) (Ok [Identifier "x"]))
     //printfn "Block: %A" ((|BLOCK|_|) (Ok [PARTTWOTEST]))
+    printfn "Block: %A" ((|BLOCK|_|) (Ok [Fun;Identifier "y"; Arrow ; LCBra; PARTTWOTEST ;RCBra]))
     //printfn "Parameters: %A" ((|PARAMLST|_|) (Ok [Identifier "x"]))
     //printfn "Parameters: %A" ((|PARAMLST|_|) (Ok [Identifier "x"; Identifier "y"]))
     //printfn "curly: %A" ((|CURLY|_|) (Ok [LCBra;PARTTWOTEST;RCBra]))
