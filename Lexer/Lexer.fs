@@ -154,10 +154,10 @@ let main argv =
     let seperator = [[';'],'=']
 
     // Optional
-    let seperator = [['?'],'=']
+    let optional = [['?'],'=']
 
     // At
-    let seperator = [['@'],'=']
+    let at = [['@'],'=']
 
     // Range
     let range = 
