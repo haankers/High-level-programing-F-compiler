@@ -2,6 +2,44 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
+      "Expecto/8.13.1": {
+        "type": "package",
+        "dependencies": {
+          "FSharp.Core": "4.3.4",
+          "Mono.Cecil": "0.11.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Expecto.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Expecto.dll": {}
+        }
+      },
+      "Expecto.FsCheck/8.13.1": {
+        "type": "package",
+        "dependencies": {
+          "Expecto": "8.13.1",
+          "FsCheck": "2.14.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Expecto.FsCheck.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Expecto.FsCheck.dll": {}
+        }
+      },
+      "FsCheck/2.14.0": {
+        "type": "package",
+        "dependencies": {
+          "FSharp.Core": "4.2.3"
+        },
+        "compile": {
+          "lib/netstandard2.0/FsCheck.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/FsCheck.dll": {}
+        }
+      },
       "FSharp.Core/4.7.0": {
         "type": "package",
         "compile": {
@@ -51,10 +89,81 @@
             "locale": "zh-Hant"
           }
         }
+      },
+      "Mono.Cecil/0.11.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Mono.Cecil.Mdb.dll": {},
+          "lib/netstandard2.0/Mono.Cecil.Pdb.dll": {},
+          "lib/netstandard2.0/Mono.Cecil.Rocks.dll": {},
+          "lib/netstandard2.0/Mono.Cecil.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Mono.Cecil.Mdb.dll": {},
+          "lib/netstandard2.0/Mono.Cecil.Pdb.dll": {},
+          "lib/netstandard2.0/Mono.Cecil.Rocks.dll": {},
+          "lib/netstandard2.0/Mono.Cecil.dll": {}
+        }
       }
     }
   },
   "libraries": {
+    "Expecto/8.13.1": {
+      "sha512": "1PbBzyl6onHb1ahdP5B0bo9Q8Bj0iJVYbW/krTlqSfsOcbhdQkkqr98DbD/CidxO/uSKANRiuylXO7LdaZBoUQ==",
+      "type": "package",
+      "path": "expecto/8.13.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "expecto.8.13.1.nupkg.sha512",
+        "expecto.nuspec",
+        "lib/net461/Expecto.dll",
+        "lib/net461/Expecto.pdb",
+        "lib/net461/Expecto.xml",
+        "lib/netstandard2.0/Expecto.dll",
+        "lib/netstandard2.0/Expecto.pdb",
+        "lib/netstandard2.0/Expecto.xml",
+        "paket-installmodel.cache"
+      ]
+    },
+    "Expecto.FsCheck/8.13.1": {
+      "sha512": "uncfLPvl0RDMZeDU3PfZYU+wsrlBG/8aappHdD+jlyyco2gCsExPgPVfrJVI/Zb5zEHG7qyljLKxXqDhd5mtHg==",
+      "type": "package",
+      "path": "expecto.fscheck/8.13.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "expecto.fscheck.8.13.1.nupkg.sha512",
+        "expecto.fscheck.nuspec",
+        "lib/net461/Expecto.FsCheck.dll",
+        "lib/net461/Expecto.FsCheck.pdb",
+        "lib/net461/Expecto.FsCheck.xml",
+        "lib/netstandard2.0/Expecto.FsCheck.dll",
+        "lib/netstandard2.0/Expecto.FsCheck.pdb",
+        "lib/netstandard2.0/Expecto.FsCheck.xml",
+        "paket-installmodel.cache"
+      ]
+    },
+    "FsCheck/2.14.0": {
+      "sha512": "4D8/O3OA0p5GFToCqweJai5BzN2ci5arKuuAJM8EHF/0Ss+scA7RWsXMhBwzEicy9nWaSRNL5RavzTz6zqFHkg==",
+      "type": "package",
+      "path": "fscheck/2.14.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "fscheck.2.14.0.nupkg.sha512",
+        "fscheck.nuspec",
+        "lib/net452/FsCheck.dll",
+        "lib/net452/FsCheck.xml",
+        "lib/netstandard1.0/FsCheck.dll",
+        "lib/netstandard1.0/FsCheck.xml",
+        "lib/netstandard1.6/FsCheck.dll",
+        "lib/netstandard1.6/FsCheck.xml",
+        "lib/netstandard2.0/FsCheck.dll",
+        "lib/netstandard2.0/FsCheck.xml",
+        "paket-installmodel.cache"
+      ]
+    },
     "FSharp.Core/4.7.0": {
       "sha512": "6Bf2qzSCaJoP6tTfO+a5muUS7QbyJANqSut73zQvwQ9It5P0ITz9VKseeia2ofco30c55EQ0jA2wf2+A2gpGnw==",
       "type": "package",
@@ -97,13 +206,44 @@
         "lib/netstandard2.0/ru/FSharp.Core.resources.dll",
         "lib/netstandard2.0/tr/FSharp.Core.resources.dll",
         "lib/netstandard2.0/zh-Hans/FSharp.Core.resources.dll",
-        "lib/netstandard2.0/zh-Hant/FSharp.Core.resources.dll"
+        "lib/netstandard2.0/zh-Hant/FSharp.Core.resources.dll",
+        "paket-installmodel.cache"
+      ]
+    },
+    "Mono.Cecil/0.11.0": {
+      "sha512": "Oq/xuL4giwKo4yveCw+VVXILaylbyN2QakWRV/840mLCO9B6xvs+ADjSZagyU8C9aEiFFTZE2pNnobSrZWTVlw==",
+      "type": "package",
+      "path": "mono.cecil/0.11.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/Mono.Cecil.Mdb.dll",
+        "lib/net40/Mono.Cecil.Mdb.pdb",
+        "lib/net40/Mono.Cecil.Pdb.dll",
+        "lib/net40/Mono.Cecil.Pdb.pdb",
+        "lib/net40/Mono.Cecil.Rocks.dll",
+        "lib/net40/Mono.Cecil.Rocks.pdb",
+        "lib/net40/Mono.Cecil.dll",
+        "lib/net40/Mono.Cecil.pdb",
+        "lib/netstandard2.0/Mono.Cecil.Mdb.dll",
+        "lib/netstandard2.0/Mono.Cecil.Mdb.pdb",
+        "lib/netstandard2.0/Mono.Cecil.Pdb.dll",
+        "lib/netstandard2.0/Mono.Cecil.Pdb.pdb",
+        "lib/netstandard2.0/Mono.Cecil.Rocks.dll",
+        "lib/netstandard2.0/Mono.Cecil.Rocks.pdb",
+        "lib/netstandard2.0/Mono.Cecil.dll",
+        "lib/netstandard2.0/Mono.Cecil.pdb",
+        "mono.cecil.0.11.0.nupkg.sha512",
+        "mono.cecil.nuspec"
       ]
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "FSharp.Core >= 4.7.0"
+      "Expecto >= 8.13.1",
+      "Expecto.FsCheck >= 8.13.1",
+      "FSharp.Core >= 4.7.0",
+      "FsCheck >= 2.14.0"
     ]
   },
   "packageFolders": {
@@ -136,9 +276,21 @@
     "frameworks": {
       "netcoreapp3.1": {
         "dependencies": {
+          "Expecto": {
+            "target": "Package",
+            "version": "[8.13.1, )"
+          },
+          "Expecto.FsCheck": {
+            "target": "Package",
+            "version": "[8.13.1, )"
+          },
           "FSharp.Core": {
             "target": "Package",
             "version": "[4.7.0, )"
+          },
+          "FsCheck": {
+            "target": "Package",
+            "version": "[2.14.0, )"
           }
         },
         "imports": [

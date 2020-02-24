@@ -31,9 +31,21 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "Expecto": {
+              "target": "Package",
+              "version": "[8.13.1, )"
+            },
+            "Expecto.FsCheck": {
+              "target": "Package",
+              "version": "[8.13.1, )"
+            },
             "FSharp.Core": {
               "target": "Package",
               "version": "[4.7.0, )"
+            },
+            "FsCheck": {
+              "target": "Package",
+              "version": "[2.14.0, )"
             }
           },
           "imports": [

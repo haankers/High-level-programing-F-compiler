@@ -1,4 +1,7 @@
 open System
+open System.IO
+open FsCheck
+open Expecto
 
 type Token = As | Let | Function | Func | Match | With | Type | When | If | Elif | Then | Else | True | False | Null
             | Space | Tab | NewLine
@@ -93,7 +96,7 @@ let _null =
 
 // Spaces
 let _space = [[' '],'+'],Space
-let _tab = [['\t'],'='],Tab
+let _tab = [['\011'],'='],Tab
 let _newLine = [['\n'],'+'],NewLine
 
 let _variable =
@@ -297,8 +300,8 @@ let nGrams = [_as; _let; _function; _func; _match; _with; _type; _when; _if; _el
 
 let lexer cLst =
     let mapper lst = List.map (lexNGram lst) nGrams |>
-        (List.find Option.isSome) |>
-        (Option.get)
+                            (List.find Option.isSome) |>
+                            (Option.get)
     let rec lexerRec lst = 
         match lst with 
         |   [] -> []
@@ -309,15 +312,30 @@ let lexer cLst =
                 else
                     (lexerRec remaining)
     lexerRec cLst
-    
 
+let fileToArray fileName = Seq.toList (File.ReadAllText fileName)
+    
+[<Tests>]
+let tests =
+  testList "Single Elements" [
+    test "one test" {
+      Expect.equal (lexer (Seq.toList "let =")) [Let;Equal] "equal"
+    }
+
+    test "one test2" {
+      Expect.equal (lexer (fileToArray "./Lexer/Test1.fs")) [Let;Equal] "equal"
+    }
+  ]
+  |> testLabel "one Element"
 
 [<EntryPoint>]
 let main argv = 
+    runTestsInAssembly defaultConfig [||] |> ignore
+    
     let print x = printfn "%A" x
+    print (Seq.toList "=         =")
+    print (lexer (Seq.toList "=         ="))
 
-    print (lexer (Seq.toList "let variableX = 1+5-5.434"))
-    print (lexer (Seq.toList "let function abiub a 123 = 1+5-5.434"))
-
+    print "finished"
     Console.ReadKey() |> ignore // prevents window closing under VS Code
     0 // return an integer exit code
