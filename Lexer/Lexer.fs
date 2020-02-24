@@ -1,6 +1,7 @@
 open System
 
-type Token = Space | Tab | NewLine
+type Token = As | Let | Function | Func | Match | With | Type | When | If | Elif | Then | Else | True | False | Null
+            | Space | Tab | NewLine
             | Variable of char list
             | FloatLit of char list | IntegerLit of char list | StringLit of char list
             | LSqBra | RSqBra | LRdBra | RRdBra
@@ -9,9 +10,87 @@ type Token = Space | Tab | NewLine
             | BoolNot | BoolAnd | BoolOr
             | BitwiseAnd | BitwiseOr | BitwiseXor | BitwiseNot | BitwiseLshift | BitwiseRshift
             | LActivePattern | RActivePattern
-            | Arrow | MemberAccess | TypeSeperator | RefAssign | ListSeperator
+            | Pipe | Arrow | MemberAccess | TypeSeperator | RefAssign | ListSeperator
             | Seperator | Optional | At | Range
             | SingleComm | LMultiComm | RMultiComm
+// key words
+let _as =
+    [['a'],'='
+     ['s'],'='],As
+let _let =
+    [['l'],'='
+     ['e'],'='
+     ['t'],'='],Let 
+let _function =
+    [['f'],'='
+     ['u'],'='
+     ['n'],'='
+     ['c'],'='
+     ['t'],'='
+     ['i'],'='
+     ['o'],'='
+     ['n'],'='],Function 
+let _func =
+    [['f'],'='
+     ['u'],'='
+     ['n'],'='
+     ['c'],'='],Func 
+let _match =
+    [['m'],'='
+     ['a'],'='
+     ['t'],'='
+     ['c'],'='
+     ['h'],'='],Match 
+let _with =
+    [['w'],'='
+     ['i'],'='
+     ['t'],'='
+     ['h'],'='],With 
+let _type =
+    [['t'],'='
+     ['y'],'='
+     ['p'],'='
+     ['e'],'='],Type 
+let _when =
+    [['w'],'='
+     ['h'],'='
+     ['e'],'='
+     ['n'],'='],When 
+let _if =
+    [['i'],'='
+     ['f'],'='],If 
+let _elif =
+    [['e'],'='
+     ['l'],'='
+     ['i'],'='
+     ['f'],'='],Elif 
+let _then =
+    [['t'],'='
+     ['h'],'='
+     ['e'],'='
+     ['n'],'='],Then 
+let _else =
+    [['e'],'='
+     ['l'],'='
+     ['s'],'='
+     ['e'],'='],Else 
+let _true =
+    [['t'],'='
+     ['r'],'='
+     ['u'],'='
+     ['e'],'='],True 
+let _false =
+    [['f'],'='
+     ['a'],'='
+     ['l'],'='
+     ['s'],'='
+     ['e'],'='],False 
+let _null =
+    [['n'],'='
+     ['u'],'='
+     ['l'],'='
+     ['l'],'='],Null 
+
 // Spaces
 let _space = [[' '],'+'],Space
 let _tab = [['\t'],'='],Tab
@@ -108,6 +187,7 @@ let _rActivePattern =
      [')'],'='],RActivePattern
 
 // Functions
+let _pipe = [['|'],'='],Pipe
 let _arrow = 
     [['-'],'='
      ['>'],'='],Arrow
@@ -201,8 +281,8 @@ let lexNGram cLst (nGram,nGramType) =
 
 // type tokens = stringLit of string
 // start of the lexer
-let nGrams = [_space;_tab;
-            _variable;
+let nGrams = [_as; _let; _function; _func; _match; _with; _type; _when; _if; _elif; _then; _else; _true; _false; _null;
+            _space;_tab;
             _floatLit; _integerLit; _stringLit;
             _bitwiseAnd; _bitwiseOr; _bitwiseXor; _bitwiseNot; _bitwiseLshift; _bitwiseRshift;
             _boolNot; _boolAnd; _boolOr;
@@ -212,7 +292,8 @@ let nGrams = [_space;_tab;
             _lActivePattern; _rActivePattern;
             _arrow; _memberAccess; _typeSeperator; _refAssign; _listSeperator;
             _seperator; _optional; _at; _range;
-            _lSqBra; _rSqBra; _lRdBra; _rRdBra]
+            _lSqBra; _rSqBra; _lRdBra; _rRdBra;
+            _variable;]
 
 let lexer cLst =
     let mapper lst = List.map (lexNGram lst) nGrams |>
@@ -223,7 +304,10 @@ let lexer cLst =
         |   [] -> []
         |   lst' -> 
                 let tokenType, remaining = mapper lst'
-                [tokenType]@(lexerRec remaining)
+                if tokenType <> Space then
+                    [tokenType]@(lexerRec remaining)
+                else
+                    (lexerRec remaining)
     lexerRec cLst
     
 
@@ -232,15 +316,8 @@ let lexer cLst =
 let main argv = 
     let print x = printfn "%A" x
 
-    // print (lexNGram integerLit (Seq.toList "\"here\"""))
-    // print (lexNGram integerLit (Seq.toList "1"))
-    // print (lexNGram integerLit (Seq.toList "-12414"))
-    // print (lexNGram integerLit (Seq.toList "-12414++++++"))
-    // print (lexNGram integerLit (Seq.toList "12414"))
-    // print (lexNGram integerLit (Seq.toList "-12414.12++++++"))
-    // print (lexNGram integerLit (Seq.toList "-12414.12"))
-    // print (lexNGram integerLit (Seq.toList "12414.12"))
-    print (lexer (Seq.toList "-1241241"))
+    print (lexer (Seq.toList "let variableX = 1+5-5.434"))
+    print (lexer (Seq.toList "let function abiub a 123 = 1+5-5.434"))
 
     Console.ReadKey() |> ignore // prevents window closing under VS Code
     0 // return an integer exit code
