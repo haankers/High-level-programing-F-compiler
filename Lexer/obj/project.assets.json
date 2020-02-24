@@ -112,11 +112,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/harrisonankers/Documents/UNI/Year 4/HLP/Tick2/FSTop.fsproj",
+      "projectUniqueName": "/Users/harrisonankers/Documents/UNI/Year 4/HLP/High-level-programing-F-compiler/Lexer/FSTop.fsproj",
       "projectName": "FSTop",
-      "projectPath": "/Users/harrisonankers/Documents/UNI/Year 4/HLP/Tick2/FSTop.fsproj",
+      "projectPath": "/Users/harrisonankers/Documents/UNI/Year 4/HLP/High-level-programing-F-compiler/Lexer/FSTop.fsproj",
       "packagesPath": "/Users/harrisonankers/.nuget/packages/",
-      "outputPath": "/Users/harrisonankers/Documents/UNI/Year 4/HLP/Tick2/obj/",
+      "outputPath": "/Users/harrisonankers/Documents/UNI/Year 4/HLP/High-level-programing-F-compiler/Lexer/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/harrisonankers/.nuget/NuGet/NuGet.Config"
