@@ -75,8 +75,8 @@ module rec secondparser =
         |IDENT (Some id1, PARAMLST (Some paras, Ok tail)) -> Some (ParaLst(id1,paras)), Ok tail 
         |IDENT (Some id1, Ok tail) -> Some (ParaLst(id1,NULL)), Ok tail 
         //let errors pass from bottom
-        |IDENT (Some _, PARAMLST (None, Error msg)) -> None, Error msg
-        |IDENT (None, Error msg) -> None, Error msg
+        //|IDENT (Some _, PARAMLST (None, Error msg)) -> None, Error msg
+        //|IDENT (None, Error msg) -> None, Error msg
         //default
         |_ -> None, Error ("undefined error at parameters")
         |> Some
@@ -107,7 +107,7 @@ module rec secondparser =
         |LAM (PARAMLST (Some _,  CURLY(Some _, Ok _)))-> None, Error("need \"->\" between parameters and function body")
         //let errors pass from bottom
         |LAM (PARAMLST (Some _, ARR ( CURLY(None, Error msg))))-> None, Error msg
-        |LAM (PARAMLST (None, Error msg))-> None, Error msg
+        //|LAM (PARAMLST (None, Error msg))-> None, Error msg
         //default
         | _ -> None, Error("undefined error when parsing lambda functions")
         |> Some
@@ -127,10 +127,11 @@ module rec secondparser =
         | (IDENT (Some _, EQL(CURLY (Some _, Ok _))))-> None, Error("need \"let\" when defining a function")
         |LET (IDENT (Some _, (CURLY (Some _, Ok _))))-> None, Error("need \"=\" between parameters and function body")
         //let errors pass from bottom
-        |LET (IDENT (Some _,PARAMLST (Some _, EQL ( CURLY(None, Error msg)))) )-> None, Error msg
-        |LET (IDENT (Some _,PARAMLST (None, Error msg)) )-> None, Error msg
-        |LET (IDENT (None, Error msg) )-> None, Error msg
         |LET (IDENT (Some _, EQL(CURLY (None,Error msg))))-> None,Error msg
+        |LET (IDENT (Some _,PARAMLST (Some _, EQL ( CURLY(None, Error msg)))) )-> None, Error msg
+        //|LET (IDENT (Some _,PARAMLST (None, Error msg)) )-> None, Error msg
+        //|LET (IDENT (None, Error msg) )-> None, Error msg
+        
         //default
         | _ -> None, Error("undefined error when parsing user-defined functions")
         |> Some
@@ -166,25 +167,28 @@ module rec secondparser =
 open secondparser
 [<EntryPoint>]
 let main argv =
-    let tokenlist = [Let;Identifier "x"; EqualTo ; LCBra; Fun;Identifier "y"; Arrow ; LCBra; PARTTWOTEST ;RCBra;PARTTWOTEST;RCBra]
+    let tokenlist = [Let;Identifier "x"; EqualTo ; LCBra; Fun;Identifier "y"; Arrow ; LCBra; PARTTWOTEST ;RCBra;RCBra]
     printfn "Tokens: %A" tokenlist
     let ast = SubParsing tokenlist
     printfn "ast: %A" ast
     
     //printfn "Id: %A" ((|IDENT|_|) (Ok [Identifier "x"]))
     //printfn "Block: %A" ((|BLOCK|_|) (Ok [PARTTWOTEST]))
-    printfn "Block: %A" ((|BLOCK|_|) (Ok [Fun;Identifier "y"; Arrow ; LCBra; PARTTWOTEST ;RCBra]))
+    //printfn "Block: %A" ((|BLOCK|_|) (Ok [Fun;Identifier "y"; Arrow ; LCBra; PARTTWOTEST ;RCBra]))
     //printfn "Parameters: %A" ((|PARAMLST|_|) (Ok [Identifier "x"]))
     //printfn "Parameters: %A" ((|PARAMLST|_|) (Ok [Identifier "x"; Identifier "y"]))
     //printfn "curly: %A" ((|CURLY|_|) (Ok [LCBra;PARTTWOTEST;RCBra]))
     //printfn "curly: %A" ((|CURLY|_|) (Ok [PARTTWOTEST;RCBra]))
     //printfn "curly: %A" ((|CURLY|_|) (Ok [LCBra;PARTTWOTEST]))
+    //printfn "curly: %A" ((|CURLY|_|) (Ok [LCBra; Fun;Identifier "y"; Arrow ; LCBra; PARTTWOTEST ;RCBra;RCBra]))
     //printfn "Lambda function: %A" ((|LAMBDA|_|) (Ok [ Fun;Identifier "y"; Arrow ; LCBra; PARTTWOTEST ;RCBra]))
     //printfn "Lambda function: %A" ((|LAMBDA|_|) (Ok [ Identifier "y"; Arrow ; LCBra; PARTTWOTEST ;RCBra]))
     //printfn "Lambda function: %A" ((|LAMBDA|_|) (Ok [ Fun;Identifier "y"; LCBra; PARTTWOTEST ;RCBra]))
+    //printfn "Lambda: %A" ((|LAMBDA|_|) (Ok [Fun;Identifier "y"; Arrow ;LCBra; Fun;Identifier "y"; Arrow ; LCBra; PARTTWOTEST ;RCBra;RCBra]))
     //printfn "Named function: %A" ((|NAMED|_|) (Ok [ Let;Identifier "y"; EqualTo ; LCBra; PARTTWOTEST ;RCBra]))
     //printfn "Named function: %A" ((|NAMED|_|) (Ok [ Let;Identifier "y" ; LCBra; PARTTWOTEST ;RCBra]))
     //printfn "Named function: %A" ((|NAMED|_|) (Ok [ Identifier "y"; EqualTo ; LCBra; PARTTWOTEST ;RCBra]))
+    //printfn "Named function: %A" ((|NAMED|_|) (Ok [Let;Identifier "y";Identifier "z" ;EqualTo ;LCBra; Fun;Identifier "y"; Arrow ; LCBra; PARTTWOTEST ;RCBra;RCBra]))
     //printfn "function definition: %A" ((|FUNDEF|_|) (Ok [ Let;Identifier "y"; EqualTo ; LCBra; PARTTWOTEST ;RCBra]))
     //printfn "function definition: %A" ((|FUNDEF|_|) (Ok [ Let;Identifier "y" ; LCBra; PARTTWOTEST ;RCBra]))
     //printfn "function definition: %A" ((|FUNDEF|_|) (Ok [ Identifier "y"; EqualTo ; LCBra; PARTTWOTEST ;RCBra]))
